@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KRC Fitness World – Thiruvazhiyode</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" alt="KRC Logo" class="nav-logo-img"/>
+        <div class="nav-logo-text">
+          <span class="logo-krc">KRC</span>
+          <span class="logo-sub">FITNESS WORLD</span>
+        </div>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="active">Home</a>
+        <a href="/about/">About</a>
+        <a href="classes-trainers.html">Classes &amp; Trainers</a>
+        <a href="membership.html">Membership</a>
+        <a href="#enquiry" onclick="closeNav()">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">THIRUVAZHIYODE &amp; SREEKRISHNAPURAM</div>
+        <h1 class="hero-title">
+          <span class="line-reveal" style="--d:0.1s">HIGH-END</span>
+          <span class="line-reveal gold" style="--d:0.3s">TRAINING</span>
+          <span class="line-reveal" style="--d:0.5s">REAL RESULTS</span>
+        </h1>
+        <p class="hero-sub line-reveal" style="--d:0.7s">
+          Unisex Multi Gym &amp; Bodybuilding Academy — PT · Classes · Recovery · Nutrition Support
+        </p>
+        <div class="hero-cta line-reveal" style="--d:0.9s">
+          <a href="membership.html" class="btn-primary">JOIN NOW</a>
+          <a href="classes-trainers.html" class="btn-outline">VIEW CLASSES</a>
+        </div>
+      </div>
+      <div class="hero-mascot">
+        <img src="images/logo.png" alt="KRC Mascot"/>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-number" data-target="2">0</span><span class="stat-plus"></span>
+      <span class="stat-label">BRANCHES</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-number" data-target="500">0</span><span class="stat-plus">+</span>
+      <span class="stat-label">MEMBERS</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-number" data-target="10">0</span><span class="stat-plus">+</span>
+      <span class="stat-label">TRAINERS</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-number" data-target="5">0</span><span class="stat-plus">+</span>
+      <span class="stat-label">YEARS STRONG</span>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">WHAT WE OFFER</span>
+        <h2 class="section-title">TRAIN LIKE A <span class="gold">CHAMPION</span></h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">💪</div>
+          <h3>Personal Training</h3>
+          <p>One-on-one sessions with certified coaches tailored to your specific goals — strength, fat loss, or athletic performance.</p>
+          <div class="service-line"></div>
+        </div>
+        <div class="service-card reveal" style="--rd:0.1s">
+          <div class="service-icon">🏋️</div>
+          <h3>Group Classes</h3>
+          <p>High-energy group sessions from HIIT and CrossFit to Zumba and Yoga. Something for every fitness level.</p>
+          <div class="service-line"></div>
+        </div>
+        <div class="service-card reveal" style="--rd:0.2s">
+          <div class="service-icon">🧬</div>
+          <h3>Nutrition Support</h3>
+          <p>Expert diet planning and supplement guidance to fuel your workouts and accelerate recovery.</p>
+          <div class="service-line"></div>
+        </div>
+        <div class="service-card reveal" style="--rd:0.1s">
+          <div class="service-icon">🔄</div>
+          <h3>Recovery &amp; Wellness</h3>
+          <p>Dedicated recovery programs including stretching, mobility work, and rest protocols designed for longevity.</p>
+          <div class="service-line"></div>
+        </div>
+        <div class="service-card reveal" style="--rd:0.2s">
+          <div class="service-icon">🏆</div>
+          <h3>Bodybuilding Academy</h3>
+          <p>Structured competition prep for aspiring bodybuilders — posing, peaking, and stage-ready training.</p>
+          <div class="service-line"></div>
+        </div>
+        <div class="service-card reveal" style="--rd:0.3s">
+          <div class="service-icon">♀️</div>
+          <h3>Ladies Section</h3>
+          <p>A comfortable, empowering environment for women to train confidently without compromise.</p>
+          <div class="service-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY KRC -->
+  <section class="section why-krc">
+    <div class="container why-grid">
+      <div class="why-left reveal">
+        <span class="section-tag">WHY CHOOSE US</span>
+        <h2 class="section-title">THE KRC <span class="gold">DIFFERENCE</span></h2>
+        <p class="why-desc">At KRC Fitness World, we combine state-of-the-art equipment with expert coaching in a community that pushes you further every single day.</p>
+        <ul class="why-list">
+          <li><span class="check">✓</span> AC &amp; Non-AC Sections Available</li>
+          <li><span class="check">✓</span> Modern Equipment — Free Weights to Machines</li>
+          <li><span class="check">✓</span> Certified Personal Trainers</li>
+          <li><span class="check">✓</span> Flexible Timings — Morning &amp; Evening Batches</li>
+          <li><span class="check">✓</span> Diet &amp; Supplement Guidance</li>
+          <li><span class="check">✓</span> Unisex — Welcoming to All</li>
+        </ul>
+        <a href="/about/" class="btn-primary" style="margin-top:2rem;display:inline-block;">LEARN MORE</a>
+      </div>
+      <div class="why-right reveal" style="--rd:0.2s">
+        <div class="why-visual">
+          <div class="why-card-big">
+            <div class="wc-number gold">01</div>
+            <h4>STRENGTH</h4>
+            <p>Build raw power with progressive overload programs</p>
+          </div>
+          <div class="why-card-big">
+            <div class="wc-number gold">02</div>
+            <h4>ENDURANCE</h4>
+            <p>Cardiovascular conditioning for peak stamina</p>
+          </div>
+          <div class="why-card-big">
+            <div class="wc-number gold">03</div>
+            <h4>AESTHETICS</h4>
+            <p>Body recomposition — lose fat, build muscle</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP PREVIEW -->
+  <section class="section membership-preview">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">MEMBERSHIP PLANS</span>
+        <h2 class="section-title">PICK YOUR <span class="gold">PLAN</span></h2>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card reveal">
+          <div class="plan-label">BASIC</div>
+          <div class="plan-price">₹<span>799</span><sub>/mo</sub></div>
+          <ul class="plan-features">
+            <li>✓ Gym Access</li>
+            <li>✓ Locker Room</li>
+            <li>✓ Group Classes</li>
+            <li class="dim">✗ Personal Trainer</li>
+            <li class="dim">✗ Nutrition Plan</li>
+          </ul>
+          <a href="membership.html" class="btn-outline">GET STARTED</a>
+        </div>
+        <div class="plan-card featured reveal" style="--rd:0.1s">
+          <div class="plan-badge">POPULAR</div>
+          <div class="plan-label">PRO</div>
+          <div class="plan-price">₹<span>1499</span><sub>/mo</sub></div>
+          <ul class="plan-features">
+            <li>✓ Gym Access</li>
+            <li>✓ Locker Room</li>
+            <li>✓ All Classes</li>
+            <li>✓ Personal Trainer (4×/mo)</li>
+            <li class="dim">✗ Nutrition Plan</li>
+          </ul>
+          <a href="membership.html" class="btn-primary">GET STARTED</a>
+        </div>
+        <div class="plan-card reveal" style="--rd:0.2s">
+          <div class="plan-label">ELITE</div>
+          <div class="plan-price">₹<span>2499</span><sub>/mo</sub></div>
+          <ul class="plan-features">
+            <li>✓ Gym Access</li>
+            <li>✓ Locker Room</li>
+            <li>✓ All Classes</li>
+            <li>✓ Personal Trainer (Unlimited)</li>
+            <li>✓ Custom Nutrition Plan</li>
+          </ul>
+          <a href="membership.html" class="btn-outline">GET STARTED</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / ENQUIRY FORM -->
+  <section class="section enquiry-section" id="enquiry">
+    <div class="container enquiry-grid">
+      <div class="enq-left reveal">
+        <span class="section-tag">GET IN TOUCH</span>
+        <h2 class="section-title">START YOUR <span class="gold">JOURNEY</span></h2>
+        <p>Fill in your details and tap Send — your enquiry goes straight to us on WhatsApp.</p>
+        <div class="contact-info">
+          <div class="ci-item">📍 <strong>Branch 1:</strong> KRC Fitness World, Thiruvazhiyode, Kerala</div>
+          <div class="ci-item">📍 <strong>Branch 2:</strong> KRC Fitness World, Sreekrishnapuram, Kerala</div>
+          <div class="ci-item">📞 <a href="tel:+91XXXXXXXXXX" style="color:var(--gold)">+91 XXXXX XXXXX</a></div>
+          <div class="ci-item">🕐 Mon–Sat: 5:30 AM – 9:30 PM</div>
+        </div>
+        <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="btn-wa-direct">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.825.738 5.476 2.031 7.775L0 32l8.418-2.007A15.934 15.934 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.273 22.088c-.397-.199-2.352-1.16-2.717-1.292-.365-.132-.63-.199-.896.199-.266.398-1.029 1.293-1.261 1.558-.232.266-.464.299-.862.1-.397-.2-1.679-.619-3.198-1.973-1.182-1.053-1.98-2.352-2.212-2.75-.232-.397-.025-.612.174-.81.179-.178.398-.464.597-.697.199-.232.265-.398.397-.663.133-.266.066-.498-.033-.697-.1-.199-.896-2.16-1.228-2.957-.323-.776-.65-.671-.896-.683l-.763-.013c-.266 0-.697.1-1.062.498-.365.398-1.394 1.36-1.394 3.317 0 1.957 1.427 3.848 1.626 4.114.2.265 2.808 4.287 6.803 6.014.951.411 1.693.656 2.272.84.954.303 1.823.26 2.51.158.765-.114 2.352-.961 2.684-1.889.332-.928.332-1.724.232-1.889-.099-.166-.365-.265-.763-.464z"/></svg>
+          CHAT DIRECTLY ON WHATSAPP
+        </a>
+      </div>
+
+      <div class="enq-right reveal" style="--rd:0.15s">
+        <form class="enquiry-form" id="enquiryForm" onsubmit="sendToWhatsApp(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" id="enqName" placeholder="Your name" required/>
+            </div>
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="tel" id="enqPhone" placeholder="+91 XXXXX XXXXX" required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Interested In</label>
+            <select id="enqInterest">
+              <option value="">Select a program</option>
+              <option>Personal Training</option>
+              <option>Group Classes</option>
+              <option>Bodybuilding</option>
+              <option>Weight Loss</option>
+              <option>Nutrition Support</option>
+              <option>General Membership</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Preferred Branch</label>
+              <select id="enqBranch">
+                <option value="">Select branch</option>
+                <option>Thiruvazhiyode</option>
+                <option>Sreekrishnapuram</option>
+                <option>Any Branch</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Preferred Time</label>
+              <select id="enqTime">
+                <option value="">Select</option>
+                <option>Morning (5:30–9 AM)</option>
+                <option>Evening (4–9:30 PM)</option>
+                <option>Any Time</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea id="enqMessage" rows="3" placeholder="Tell us your fitness goal..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary full-width">
+            SEND ENQUIRY VIA WHATSAPP →
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner container">
+      <div class="footer-brand">
+        <span class="logo-krc">KRC</span>
+        <span class="logo-sub">FITNESS WORLD</span>
+        <p>Unisex Multi Gym &amp; Bodybuilding Academy</p>
+        <div class="footer-locations">
+          <div>📍 Thiruvazhiyode, Kerala</div>
+          <div>📍 Sreekrishnapuram, Kerala</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>QUICK LINKS</h4>
+        <a href="index.html">Home</a>
+        <a href="/about/">About</a>
+        <a href="classes-trainers.html">Classes &amp; Trainers</a>
+        <a href="membership.html">Membership</a>
+        <a href="#enquiry">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>PROGRAMS</h4>
+        <a href="classes-trainers.html">Personal Training</a>
+        <a href="classes-trainers.html">Group Classes</a>
+        <a href="classes-trainers.html">Bodybuilding</a>
+        <a href="classes-trainers.html">Nutrition</a>
+        <a href="classes-trainers.html">Recovery</a>
+      </div>
+      <div class="footer-social">
+        <h4>FOLLOW US</h4>
+        <div class="social-icons">
+          <a href="#" class="soc-btn">IG</a>
+          <a href="#" class="soc-btn">FB</a>
+          <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="soc-btn wa">WA</a>
+        </div>
+        <p class="footer-timing">Open: 5:30 AM – 9:30 PM<br>Monday to Saturday</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 KRC Fitness World. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="white" width="26" height="26">
+      <path d="M16 0C7.163 0 0 7.163 0 16c0 2.825.738 5.476 2.031 7.775L0 32l8.418-2.007A15.934 15.934 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.273 22.088c-.397-.199-2.352-1.16-2.717-1.292-.365-.132-.63-.199-.896.199-.266.398-1.029 1.293-1.261 1.558-.232.266-.464.299-.862.1-.397-.2-1.679-.619-3.198-1.973-1.182-1.053-1.98-2.352-2.212-2.75-.232-.397-.025-.612.174-.81.179-.178.398-.464.597-.697.199-.232.265-.398.397-.663.133-.266.066-.498-.033-.697-.1-.199-.896-2.16-1.228-2.957-.323-.776-.65-.671-.896-.683l-.763-.013c-.266 0-.697.1-1.062.498-.365.398-1.394 1.36-1.394 3.317 0 1.957 1.427 3.848 1.626 4.114.2.265 2.808 4.287 6.803 6.014.951.411 1.693.656 2.272.84.954.303 1.823.26 2.51.158.765-.114 2.352-.961 2.684-1.889.332-.928.332-1.724.232-1.889-.099-.166-.365-.265-.763-.464z"/>
+    </svg>
+  </a>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

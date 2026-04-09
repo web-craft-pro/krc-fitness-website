@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Membership — KRC Fitness World</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: calc(var(--nav-h) + 5rem) 0 5rem;
+      background: var(--dark);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(245,197,24,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,197,24,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .page-hero-inner { position: relative; z-index: 1; }
+    .page-hero-inner .section-tag { margin-bottom: 1rem; }
+    .page-hero-inner h1 {
+      font-family: var(--font-head);
+      font-size: clamp(3rem, 7vw, 6rem);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .page-hero-inner p {
+      font-family: var(--font-cond);
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    /* ── BILLING TOGGLE ── */
+    .billing-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0 1rem;
+    }
+    .billing-label {
+      font-family: var(--font-cond);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .billing-label.active { color: var(--gold); }
+    .toggle-pill {
+      position: relative;
+      width: 52px; height: 28px;
+      background: var(--border);
+      border-radius: 28px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .toggle-pill.annual { background: var(--gold); }
+    .toggle-pill::after {
+      content: '';
+      position: absolute;
+      width: 22px; height: 22px;
+      background: var(--white);
+      border-radius: 50%;
+      top: 3px; left: 3px;
+      transition: transform 0.3s;
+    }
+    .toggle-pill.annual::after { transform: translateX(24px); background: var(--black); }
+    .save-badge {
+      font-family: var(--font-cond);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      background: rgba(245,197,24,0.15);
+      color: var(--gold);
+      border: 1px solid rgba(245,197,24,0.3);
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+    }
+
+    /* ── PLANS ── */
+    .plans-section { padding: 20px 0 90px; background: var(--dark); }
+    .plans-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 0;
+    }
+    .plan-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .plan-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(245,197,24,0.4);
+    }
+    .plan-card.featured {
+      border-color: var(--gold);
+      background: linear-gradient(160deg, #1c1900, var(--card));
+      box-shadow: 0 0 40px rgba(245,197,24,0.1);
+    }
+    .plan-card.featured:hover {
+      box-shadow: 0 0 55px rgba(245,197,24,0.18);
+    }
+    .plan-badge {
+      position: absolute;
+      top: -13px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--black);
+      font-family: var(--font-cond);
+      font-weight: 900;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      padding: 0.25rem 1.1rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .plan-name {
+      font-family: var(--font-cond);
+      font-size: 0.8rem;
+      letter-spacing: 0.28em;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+    .plan-price-wrap {
+      margin-bottom: 0.5rem;
+    }
+    .plan-price-wrap .currency {
+      font-family: var(--font-cond);
+      font-size: 1.4rem;
+      color: var(--gold);
+      vertical-align: top;
+      margin-top: 0.6rem;
+      display: inline-block;
+    }
+    .plan-price-wrap .amount {
+      font-family: var(--font-head);
+      font-size: 4rem;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .plan-price-wrap .period {
+      font-family: var(--font-cond);
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-left: 0.2rem;
+    }
+    .plan-annual-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: var(--font-cond);
+      letter-spacing: 0.06em;
+      margin-bottom: 1.8rem;
+      min-height: 1.2rem;
+    }
+    .plan-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 1.8rem;
+    }
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+      margin-bottom: 2rem;
+    }
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .plan-features li .fi {
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .plan-features li.off { color: var(--muted); }
+    .plan-features li.off .fi { opacity: 0.4; }
+
+    /* ── ADDONS ── */
+    .addons-section { padding: 80px 0; background: var(--black); }
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 3rem;
+    }
+    .addon-card {
+      background: var(--card);
+      padding: 2rem 1.5rem;
+      transition: background 0.2s;
+    }
+    .addon-card:hover { background: var(--card2); }
+    .addon-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .addon-card h4 {
+      font-family: var(--font-cond);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+    .addon-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .addon-price {
+      font-family: var(--font-cond);
+      font-size: 0.88rem;
+      color: var(--gold);
+      margin-top: 0.8rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 80px 0; background: var(--dark); }
+    .faq-list {
+      max-width: 720px;
+      margin: 3rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      padding: 1.3rem 1.5rem;
+      background: var(--card);
+      border: none; cursor: pointer;
+      font-family: var(--font-cond);
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      text-align: left;
+      transition: background 0.2s, color 0.2s;
+      gap: 1rem;
+    }
+    .faq-q:hover { background: var(--card2); color: var(--gold); }
+    .faq-q.open { color: var(--gold); background: var(--card2); }
+    .faq-arrow {
+      font-size: 0.8rem; flex-shrink: 0;
+      transition: transform 0.3s;
+      color: var(--muted);
+    }
+    .faq-q.open .faq-arrow { transform: rotate(180deg); color: var(--gold); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s;
+      background: var(--black);
+    }
+    .faq-a.open { max-height: 200px; }
+    .faq-a-inner {
+      padding: 1.2rem 1.5rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ── CTA ── */
+    .mem-cta {
+      padding: 80px 0;
+      background: var(--black);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .mem-cta h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.8rem;
+    }
+    .mem-cta p {
+      font-family: var(--font-cond);
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .addons-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .plans-row { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .addons-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .addons-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" alt="KRC Logo" class="nav-logo-img"/>
+        <div class="nav-logo-text">
+          <span class="logo-krc">KRC</span>
+          <span class="logo-sub">FITNESS WORLD</span>
+        </div>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="classes-trainers.html">Classes & Trainers</a>
+        <a href="membership.html" class="active">Membership</a>
+        <a href="index.html#enquiry">Contact</a>
+      </nav>
+      <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="container page-hero-inner">
+      <span class="section-tag">CHOOSE YOUR PLAN</span>
+      <h1>MEMBERSHIP <span class="gold">PLANS</span></h1>
+      <p>NO HIDDEN FEES · NO LONG COMMITMENTS · JUST RESULTS</p>
+    </div>
+  </div>
+
+  <!-- PLANS -->
+  <section class="plans-section">
+    <div class="container">
+
+      <!-- Billing toggle -->
+      <div class="billing-toggle">
+        <span class="billing-label active" id="lblMonthly" onclick="setBilling('monthly')">MONTHLY</span>
+        <div class="toggle-pill" id="billingToggle" onclick="toggleBilling()"></div>
+        <span class="billing-label" id="lblAnnual" onclick="setBilling('annual')">ANNUAL</span>
+        <span class="save-badge">SAVE 15%</span>
+      </div>
+
+      <div class="plans-row">
+
+        <!-- BASIC -->
+        <div class="plan-card reveal">
+          <div class="plan-name">BASIC</div>
+          <div class="plan-price-wrap">
+            <span class="currency">₹</span><span class="amount" id="price-basic">799</span><span class="period">/mo</span>
+          </div>
+          <div class="plan-annual-note" id="note-basic"></div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="fi">✅</span> Full Gym Access</li>
+            <li><span class="fi">✅</span> Locker Room</li>
+            <li><span class="fi">✅</span> Group Classes (3/week)</li>
+            <li><span class="fi">✅</span> Basic Fitness Assessment</li>
+            <li class="off"><span class="fi">✗</span> Personal Trainer</li>
+            <li class="off"><span class="fi">✗</span> Nutrition Plan</li>
+            <li class="off"><span class="fi">✗</span> Priority Booking</li>
+          </ul>
+          <a href="index.html#enquiry" class="btn-outline" style="text-align:center;">GET STARTED</a>
+        </div>
+
+        <!-- PRO (featured) -->
+        <div class="plan-card featured reveal" style="--rd:0.1s">
+          <div class="plan-badge">⭐ MOST POPULAR</div>
+          <div class="plan-name">PRO</div>
+          <div class="plan-price-wrap">
+            <span class="currency">₹</span><span class="amount" id="price-pro">1499</span><span class="period">/mo</span>
+          </div>
+          <div class="plan-annual-note" id="note-pro"></div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="fi">✅</span> Full Gym Access</li>
+            <li><span class="fi">✅</span> Locker Room</li>
+            <li><span class="fi">✅</span> All Group Classes</li>
+            <li><span class="fi">✅</span> Full Fitness Assessment</li>
+            <li><span class="fi">✅</span> Personal Trainer (4 sessions/mo)</li>
+            <li><span class="fi">✅</span> Basic Nutrition Guidance</li>
+            <li class="off"><span class="fi">✗</span> Custom Nutrition Plan</li>
+          </ul>
+          <a href="index.html#enquiry" class="btn-primary" style="text-align:center;">GET STARTED</a>
+        </div>
+
+        <!-- ELITE -->
+        <div class="plan-card reveal" style="--rd:0.2s">
+          <div class="plan-name">ELITE</div>
+          <div class="plan-price-wrap">
+            <span class="currency">₹</span><span class="amount" id="price-elite">2499</span><span class="period">/mo</span>
+          </div>
+          <div class="plan-annual-note" id="note-elite"></div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="fi">✅</span> Full Gym Access</li>
+            <li><span class="fi">✅</span> Locker Room</li>
+            <li><span class="fi">✅</span> All Group Classes</li>
+            <li><span class="fi">✅</span> Full Fitness Assessment</li>
+            <li><span class="fi">✅</span> Personal Trainer (Unlimited)</li>
+            <li><span class="fi">✅</span> Custom Nutrition Plan</li>
+            <li><span class="fi">✅</span> Priority Booking & Support</li>
+          </ul>
+          <a href="index.html#enquiry" class="btn-outline" style="text-align:center;">GET STARTED</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ADD-ONS -->
+  <section class="addons-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">EXTRAS</span>
+        <h2 class="section-title">ADD-ON <span class="gold">SERVICES</span></h2>
+      </div>
+      <div class="addons-grid">
+        <div class="addon-card reveal">
+          <div class="addon-icon">🥗</div>
+          <h4>NUTRITION PLAN</h4>
+          <p>Custom diet plan tailored to your body type, goals and schedule.</p>
+          <div class="addon-price">₹499 / plan</div>
+        </div>
+        <div class="addon-card reveal" style="--rd:0.1s">
+          <div class="addon-icon">🏋️</div>
+          <h4>PERSONAL TRAINING</h4>
+          <p>One-on-one PT sessions with a certified coach. Book individually.</p>
+          <div class="addon-price">₹399 / session</div>
+        </div>
+        <div class="addon-card reveal" style="--rd:0.2s">
+          <div class="addon-icon">📊</div>
+          <h4>BODY ASSESSMENT</h4>
+          <p>Detailed body composition analysis, BMI, fat %, and progress tracking.</p>
+          <div class="addon-price">₹199 / session</div>
+        </div>
+        <div class="addon-card reveal" style="--rd:0.3s">
+          <div class="addon-icon">🎽</div>
+          <h4>KRC MERCHANDISE</h4>
+          <p>Official KRC gym wear — T-shirts, bottles, bands. Available at the counter.</p>
+          <div class="addon-price">Starting ₹299</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">QUESTIONS</span>
+        <h2 class="section-title">FREQUENTLY <span class="gold">ASKED</span></h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Is there a joining fee? <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">No joining fee for any plan. You only pay the membership amount shown. No hidden charges.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Can I pause or cancel my membership? <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. You can pause your membership for up to 30 days per year, or cancel anytime with no penalty for monthly plans. Annual plans can be paused but not refunded.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Can I use both branches with one membership? <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Yes! All Pro and Elite members get access to both our Thiruvazhiyode and Sreekrishnapuram branches. Basic plan is single-branch access.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Is there a ladies-only section? <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. KRC is a unisex gym with a dedicated ladies section available to all female members across all plans, at no extra cost.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How do I sign up? <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Walk into either branch, fill the enquiry form on this website, or WhatsApp us. Our team will get you registered within minutes.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="mem-cta">
+    <div class="container">
+      <h2>STILL UNSURE? <span class="gold">TALK TO US.</span></h2>
+      <p>WE'LL HELP YOU PICK THE RIGHT PLAN FOR YOUR GOAL</p>
+      <div class="cta-btns">
+        <a href="index.html#enquiry" class="btn-primary">ENQUIRE NOW</a>
+        <a href="https://wa.me/91XXXXXXXXXX" class="btn-outline" target="_blank">WHATSAPP US</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner container">
+      <div class="footer-brand">
+        <span class="logo-krc">KRC</span>
+        <span class="logo-sub">FITNESS WORLD</span>
+        <p>Unisex Multi Gym &amp; Bodybuilding Academy</p>
+        <div class="footer-locations">
+          <div>📍 Thiruvazhiyode, Kerala</div>
+          <div>📍 Sreekrishnapuram, Kerala</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>QUICK LINKS</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="classes-trainers.html">Classes & Trainers</a>
+        <a href="membership.html">Membership</a>
+        <a href="index.html#enquiry">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>PROGRAMS</h4>
+        <a href="classes-trainers.html">Personal Training</a>
+        <a href="classes-trainers.html">Group Classes</a>
+        <a href="classes-trainers.html">Bodybuilding</a>
+        <a href="classes-trainers.html">Nutrition</a>
+        <a href="classes-trainers.html">Recovery</a>
+      </div>
+      <div class="footer-social">
+        <h4>FOLLOW US</h4>
+        <div class="social-icons">
+          <a href="#" class="soc-btn">IG</a>
+          <a href="#" class="soc-btn">FB</a>
+          <a href="https://wa.me/91XXXXXXXXXX" class="soc-btn wa">WA</a>
+        </div>
+        <p class="footer-timing">Open: 5:30 AM – 9:30 PM<br>Monday to Saturday</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 KRC Fitness World. All rights reserved.</div>
+  </footer>
+
+  <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-float" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="white" width="28" height="28">
+      <path d="M16 0C7.163 0 0 7.163 0 16c0 2.825.738 5.476 2.031 7.775L0 32l8.418-2.007A15.934 15.934 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.267 13.267 0 01-6.765-1.851l-.485-.289-5.003 1.193 1.224-4.872-.316-.5A13.244 13.244 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.273-9.912c-.397-.199-2.352-1.16-2.717-1.292-.365-.132-.63-.199-.896.199-.266.398-1.029 1.293-1.261 1.558-.232.266-.464.299-.862.1-.397-.2-1.679-.619-3.198-1.973-1.182-1.053-1.98-2.352-2.212-2.75-.232-.397-.025-.612.174-.81.179-.178.398-.464.597-.697.199-.232.265-.398.397-.663.133-.266.066-.498-.033-.697-.1-.199-.896-2.16-1.228-2.957-.323-.776-.65-.671-.896-.683l-.763-.013c-.266 0-.697.1-1.062.498-.365.398-1.394 1.36-1.394 3.317 0 1.957 1.427 3.848 1.626 4.114.2.265 2.808 4.287 6.803 6.014.951.411 1.693.656 2.272.84.954.303 1.823.26 2.51.158.765-.114 2.352-.961 2.684-1.889.332-.928.332-1.724.232-1.889-.099-.166-.365-.265-.763-.464z"/>
+    </svg>
+  </a>
+
+  <script src="js/main.js"></script>
+  <script>
+    /* ── BILLING TOGGLE ── */
+    const prices = { basic: 799, pro: 1499, elite: 2499 };
+    let isAnnual = false;
+
+    function updatePrices() {
+      ['basic','pro','elite'].forEach(plan => {
+        const mo  = prices[plan];
+        const ann = Math.round(mo * 0.85);
+        document.getElementById('price-' + plan).textContent = isAnnual ? ann : mo;
+        document.getElementById('note-'  + plan).textContent = isAnnual
+          ? `Billed ₹${(ann * 12).toLocaleString('en-IN')} / year`
+          : '';
+      });
+      document.getElementById('billingToggle').classList.toggle('annual', isAnnual);
+      document.getElementById('lblMonthly').classList.toggle('active', !isAnnual);
+      document.getElementById('lblAnnual').classList.toggle('active',  isAnnual);
+    }
+
+    function toggleBilling() { isAnnual = !isAnnual; updatePrices(); }
+    function setBilling(type) { isAnnual = (type === 'annual'); updatePrices(); }
+
+    /* ── FAQ ── */
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const isOpen = btn.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.nextElementSibling.classList.remove('open'); });
+      if (!isOpen) { btn.classList.add('open'); answer.classList.add('open'); }
+    }
+  </script>
+</body>
+</html>

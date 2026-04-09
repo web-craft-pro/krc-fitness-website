@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Classes & Trainers — KRC Fitness World</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: calc(var(--nav-h) + 4rem) 0 4rem;
+      background: var(--dark);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(245,197,24,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,197,24,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .page-hero .section-tag { margin-bottom: 1rem; }
+    .page-hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(3rem, 7vw, 6rem);
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+    .page-hero p {
+      font-family: var(--font-cond);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+
+    /* ── TAB NAV ── */
+    .tab-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      background: var(--dark);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 50;
+    }
+    .tab-btn {
+      font-family: var(--font-cond);
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      background: none;
+      border: none;
+      padding: 1.2rem 3rem;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      position: relative;
+    }
+    .tab-btn:hover { color: var(--white); }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* ── TAB CONTENT ── */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── CLASSES FILTER ── */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .filter-btn {
+      font-family: var(--font-cond);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      padding: 0.5rem 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .filter-btn.active { background: var(--gold); color: var(--black); border-color: var(--gold); font-weight: 700; }
+
+    /* ── CLASS CARDS ── */
+    .classes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .class-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .class-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+    .class-card-top {
+      background: var(--card2);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .class-icon { font-size: 2.5rem; }
+    .class-tag {
+      font-family: var(--font-cond);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      padding: 0.25rem 0.8rem;
+      border-radius: 20px;
+      background: rgba(245,197,24,0.1);
+      color: var(--gold);
+      border: 1px solid rgba(245,197,24,0.3);
+    }
+    .class-card-body { padding: 1.5rem 2rem 2rem; }
+    .class-card-body h3 {
+      font-family: var(--font-cond);
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.6rem;
+    }
+    .class-card-body p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.2rem; }
+    .class-meta {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .class-meta span {
+      font-family: var(--font-cond);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .class-meta span b { color: var(--gold); }
+    .class-card[data-hidden="true"] { display: none; }
+
+    /* ── SCHEDULE TABLE ── */
+    .schedule-section { margin-top: 4rem; }
+    .schedule-section h2 {
+      font-family: var(--font-cond);
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+    .schedule-table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: auto;
+    }
+    .schedule-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+    .schedule-table th {
+      background: var(--gold);
+      color: var(--black);
+      font-family: var(--font-cond);
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      padding: 0.9rem 1.2rem;
+      text-align: left;
+    }
+    .schedule-table td {
+      padding: 0.9rem 1.2rem;
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+    }
+    .schedule-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .sch-badge {
+      display: inline-block;
+      font-family: var(--font-cond);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      padding: 0.15rem 0.6rem;
+      border-radius: 20px;
+      background: rgba(245,197,24,0.12);
+      color: var(--gold);
+      border: 1px solid rgba(245,197,24,0.25);
+    }
+
+    /* ── TRAINERS ── */
+    .trainers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .trainer-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+      text-align: center;
+    }
+    .trainer-card:hover { transform: translateY(-6px); border-color: var(--gold); }
+    .trainer-avatar {
+      background: linear-gradient(135deg, var(--card2), #1a1600);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      border-bottom: 2px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .trainer-avatar::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+    }
+    .trainer-body { padding: 1.8rem 1.5rem; }
+    .trainer-body h3 {
+      font-family: var(--font-cond);
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+    .trainer-role {
+      font-family: var(--font-cond);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .trainer-body p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.2rem; }
+    .trainer-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+    }
+    .skill-tag {
+      font-family: var(--font-cond);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .classes-grid, .trainers-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .classes-grid, .trainers-grid { grid-template-columns: 1fr; }
+      .tab-btn { padding: 1rem 1.5rem; font-size: 0.88rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" alt="KRC Logo" class="nav-logo-img" />
+        <div class="nav-logo-text">
+          <span class="logo-krc">KRC</span>
+          <span class="logo-sub">FITNESS WORLD</span>
+        </div>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="classes-trainers.html" class="active">Classes & Trainers</a>
+        <a href="membership.html">Membership</a>
+        <a href="index.html#enquiry">Contact</a>
+      </nav>
+      <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <span class="section-tag">KRC FITNESS WORLD</span>
+      <h1>CLASSES & <span class="gold">TRAINERS</span></h1>
+      <p>FIND YOUR PROGRAM · MEET YOUR COACH · START YOUR TRANSFORMATION</p>
+    </div>
+  </div>
+
+  <!-- TAB NAV -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('classes', this)">🏋️ CLASSES</button>
+    <button class="tab-btn" onclick="switchTab('trainers', this)">👤 TRAINERS</button>
+  </div>
+
+  <!-- ══════ CLASSES TAB ══════ -->
+  <div id="tab-classes" class="tab-content active">
+    <section class="section" style="background:var(--dark);">
+      <div class="container">
+
+        <!-- Filter -->
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterClasses('all', this)">All Classes</button>
+          <button class="filter-btn" onclick="filterClasses('strength', this)">Strength</button>
+          <button class="filter-btn" onclick="filterClasses('cardio', this)">Cardio</button>
+          <button class="filter-btn" onclick="filterClasses('body', this)">Bodybuilding</button>
+          <button class="filter-btn" onclick="filterClasses('wellness', this)">Wellness</button>
+          <button class="filter-btn" onclick="filterClasses('ladies', this)">Ladies</button>
+        </div>
+
+        <!-- Cards -->
+        <div class="classes-grid">
+
+          <div class="class-card reveal" data-cat="strength">
+            <div class="class-card-top">
+              <div class="class-icon">🏋️</div>
+              <span class="class-tag">STRENGTH</span>
+            </div>
+            <div class="class-card-body">
+              <h3>Power Lifting</h3>
+              <p>Build raw strength with structured compound movements — squat, bench, deadlift progressions for all levels.</p>
+              <div class="class-meta">
+                <span>⏱ <b>60 min</b></span>
+                <span>👥 <b>All Levels</b></span>
+                <span>🕐 <b>Morning & Eve</b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="class-card reveal" style="--rd:0.1s" data-cat="strength">
+            <div class="class-card-top">
+              <div class="class-icon">💪</div>
+              <span class="class-tag">STRENGTH</span>
+            </div>
+            <div class="class-card-body">
+              <h3>Functional Training</h3>
+              <p>Multi-plane movements designed to improve athletic performance and everyday movement patterns.</p>
+              <div class="class-meta">
+                <span>⏱ <b>45 min</b></span>
+                <span>👥 <b>Intermediate</b></span>
+                <span>🕐 <b>Morning</b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="class-card reveal" style="--rd:0.2s" data-cat="cardio">
+            <div class="class-card-top">
+              <div class="class-icon">🔥</div>
+              <span class="class-tag">CARDIO</span>
+            </div>
+            <div class="class-card-body">
+              <h3>HIIT Blast</h3>
+              <p>High-intensity interval training to torch fat and boost metabolism. Maximum burn in minimum time.</p>
+              <div class="class-meta">
+                <span>⏱ <b>30 min</b></span>
+                <span>👥 <b>All Levels</b></span>
+                <span>🕐 <b>Morning & Eve</b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="class-card reveal" style="--rd:0.1s" data-cat="cardio">
+            <div class="class-card-top">
+              <div class="class-icon">💃</div>
+              <span class="class-tag">CARDIO</span>
+            </div>
+            <div class="class-card-body">
+              <h3>Zumba</h3>
+              <p>Dance-based cardio workout combining Latin rhythms with easy-to-follow moves. Fun, energetic, effective.</p>
+              <div class="class-meta">
+                <span>⏱ <b>50 min</b></span>
+                <span>👥 <b>All Levels</b></span>
+                <span>🕐 <b>Evening</b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="class-card reveal" style="--rd:0.2s" data-cat="body">
+            <div class="class-card-top">
+              <div class="class-icon">🏆</div>
+              <span class="class-tag">BODYBUILDING</span>
+            </div>
+            <div class="class-card-body">
+              <h3>Bodybuilding Academy</h3>
+              <p>Structured hypertrophy training with periodization — designed to build the physique you've always wanted.</p>
+              <div class="class-meta">
+                <span>⏱ <b>75 min</b></span>
+                <span>👥 <b>Intermediate+</b></span>
+                <span>🕐 <b>Morning & Eve</b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="class-card reveal" style="--rd:0.1s" data-cat="body">
+            <div class="class-card-top">
+              <div class="class-icon">🥇</div>
+              <span class="class-tag">BODYBUILDING</span>
+            </div>
+            <div class="class-card-body">
+              <h3>Competition Prep</h3>
+              <p>Dedicated stage prep — posing, peaking protocols, and diet manipulation for aspiring competitors.</p>
+              <div class="class-meta">
+                <span>⏱ <b>90 min</b></span>
+                <span>👥 <b>Advanced</b></span>
+                <span>🕐 <b>By Appointment</b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="class-card reveal" style="--rd:0.2s" data-cat="wellness">
+            <div class="class-card-top">
+              <div class="class-icon">🧘</div>
+              <span class="class-tag">WELLNESS</span>
+            </div>
+            <div class="class-card-body">
+              <h3>Yoga & Flexibility</h3>
+              <p>Mobility, breathwork and mindfulness to complement your training and speed up recovery.</p>
+              <div class="class-meta">
+                <span>⏱ <b>60 min</b></span>
+                <span>👥 <b>All Levels</b></span>
+                <span>🕐 <b>Morning</b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="class-card reveal" style="--rd:0.1s" data-cat="wellness">
+            <div class="class-card-top">
+              <div class="class-icon">🥗</div>
+              <span class="class-tag">WELLNESS</span>
+            </div>
+            <div class="class-card-body">
+              <h3>Nutrition Coaching</h3>
+              <p>Personalised diet planning, macro guidance and supplement advice to fuel your goals efficiently.</p>
+              <div class="class-meta">
+                <span>⏱ <b>30 min</b></span>
+                <span>👥 <b>1-on-1</b></span>
+                <span>🕐 <b>By Appointment</b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="class-card reveal" style="--rd:0.2s" data-cat="ladies">
+            <div class="class-card-top">
+              <div class="class-icon">♀️</div>
+              <span class="class-tag">LADIES</span>
+            </div>
+            <div class="class-card-body">
+              <h3>Ladies Fitness</h3>
+              <p>A comfortable, empowering women-only zone with dedicated programs for toning, weight loss and strength.</p>
+              <div class="class-meta">
+                <span>⏱ <b>60 min</b></span>
+                <span>👥 <b>All Levels</b></span>
+                <span>🕐 <b>Morning & Eve</b></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Schedule -->
+        <div class="schedule-section reveal">
+          <h2>WEEKLY <span class="gold">SCHEDULE</span></h2>
+          <div class="schedule-table-wrap">
+            <table class="schedule-table">
+              <thead>
+                <tr>
+                  <th>TIME</th>
+                  <th>MONDAY</th>
+                  <th>WEDNESDAY</th>
+                  <th>FRIDAY</th>
+                  <th>SATURDAY</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>5:30 – 7 AM</b></td>
+                  <td>Power Lifting</td>
+                  <td>Functional Training</td>
+                  <td>Power Lifting</td>
+                  <td>HIIT Blast</td>
+                </tr>
+                <tr>
+                  <td><b>7 – 8 AM</b></td>
+                  <td>Yoga & Flexibility</td>
+                  <td>Yoga & Flexibility</td>
+                  <td>Yoga & Flexibility</td>
+                  <td>Yoga & Flexibility</td>
+                </tr>
+                <tr>
+                  <td><b>8 – 9 AM</b></td>
+                  <td>Ladies Fitness</td>
+                  <td>Ladies Fitness</td>
+                  <td>Ladies Fitness</td>
+                  <td>Ladies Fitness</td>
+                </tr>
+                <tr>
+                  <td><b>4 – 5:30 PM</b></td>
+                  <td>Bodybuilding</td>
+                  <td>HIIT Blast</td>
+                  <td>Bodybuilding</td>
+                  <td><span class="sch-badge">Open Gym</span></td>
+                </tr>
+                <tr>
+                  <td><b>5:30 – 7 PM</b></td>
+                  <td>HIIT Blast</td>
+                  <td>Power Lifting</td>
+                  <td>HIIT Blast</td>
+                  <td>Zumba</td>
+                </tr>
+                <tr>
+                  <td><b>7 – 9:30 PM</b></td>
+                  <td>Zumba</td>
+                  <td>Zumba</td>
+                  <td>Zumba</td>
+                  <td><span class="sch-badge">Open Gym</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ══════ TRAINERS TAB ══════ -->
+  <div id="tab-trainers" class="tab-content">
+    <section class="section" style="background:var(--dark);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">OUR COACHES</span>
+          <h2 class="section-title">MEET THE <span class="gold">TEAM</span></h2>
+        </div>
+        <div class="trainers-grid">
+
+          <div class="trainer-card reveal">
+            <div class="trainer-avatar">👨‍💼</div>
+            <div class="trainer-body">
+              <h3>Trainer Name</h3>
+              <div class="trainer-role">HEAD COACH · BODYBUILDING</div>
+              <p>Over 8 years of experience in competitive bodybuilding and strength coaching. Certified ISSA trainer.</p>
+              <div class="trainer-skills">
+                <span class="skill-tag">Bodybuilding</span>
+                <span class="skill-tag">Strength</span>
+                <span class="skill-tag">Competition Prep</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainer-card reveal" style="--rd:0.1s">
+            <div class="trainer-avatar">👩‍💼</div>
+            <div class="trainer-body">
+              <h3>Trainer Name</h3>
+              <div class="trainer-role">FITNESS COACH · LADIES SECTION</div>
+              <p>Specialises in women's fitness, weight loss and toning with a holistic approach to health and wellbeing.</p>
+              <div class="trainer-skills">
+                <span class="skill-tag">Weight Loss</span>
+                <span class="skill-tag">Toning</span>
+                <span class="skill-tag">Nutrition</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainer-card reveal" style="--rd:0.2s">
+            <div class="trainer-avatar">🧑‍💼</div>
+            <div class="trainer-body">
+              <h3>Trainer Name</h3>
+              <div class="trainer-role">PT COACH · HIIT & CARDIO</div>
+              <p>Expert in high-intensity training and functional fitness. Motivates members to push beyond their limits.</p>
+              <div class="trainer-skills">
+                <span class="skill-tag">HIIT</span>
+                <span class="skill-tag">Cardio</span>
+                <span class="skill-tag">Functional</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainer-card reveal" style="--rd:0.1s">
+            <div class="trainer-avatar">👨‍🏫</div>
+            <div class="trainer-body">
+              <h3>Trainer Name</h3>
+              <div class="trainer-role">YOGA & WELLNESS COACH</div>
+              <p>Certified yoga instructor with deep expertise in mobility, flexibility, and recovery protocols.</p>
+              <div class="trainer-skills">
+                <span class="skill-tag">Yoga</span>
+                <span class="skill-tag">Mobility</span>
+                <span class="skill-tag">Recovery</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainer-card reveal" style="--rd:0.2s">
+            <div class="trainer-avatar">👩‍🏫</div>
+            <div class="trainer-body">
+              <h3>Trainer Name</h3>
+              <div class="trainer-role">ZUMBA INSTRUCTOR</div>
+              <p>High-energy Zumba and dance fitness instructor. Makes every session fun, effective and unforgettable.</p>
+              <div class="trainer-skills">
+                <span class="skill-tag">Zumba</span>
+                <span class="skill-tag">Dance Fitness</span>
+                <span class="skill-tag">Cardio</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainer-card reveal" style="--rd:0.3s">
+            <div class="trainer-avatar">🧑‍🔬</div>
+            <div class="trainer-body">
+              <h3>Trainer Name</h3>
+              <div class="trainer-role">NUTRITION SPECIALIST</div>
+              <p>Diet planning, supplement guidance and body composition analysis to maximise your training results.</p>
+              <div class="trainer-skills">
+                <span class="skill-tag">Diet Planning</span>
+                <span class="skill-tag">Supplements</span>
+                <span class="skill-tag">Body Composition</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner container">
+      <div class="footer-brand">
+        <span class="logo-krc">KRC</span>
+        <span class="logo-sub">FITNESS WORLD</span>
+        <p>Unisex Multi Gym &amp; Bodybuilding Academy</p>
+        <div class="footer-locations">
+          <div>📍 Thiruvazhiyode, Kerala</div>
+          <div>📍 Sreekrishnapuram, Kerala</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>QUICK LINKS</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="classes-trainers.html">Classes & Trainers</a>
+        <a href="membership.html">Membership</a>
+        <a href="index.html#enquiry">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>PROGRAMS</h4>
+        <a href="classes-trainers.html">Personal Training</a>
+        <a href="classes-trainers.html">Group Classes</a>
+        <a href="classes-trainers.html">Bodybuilding</a>
+        <a href="classes-trainers.html">Nutrition</a>
+        <a href="classes-trainers.html">Recovery</a>
+      </div>
+      <div class="footer-social">
+        <h4>FOLLOW US</h4>
+        <div class="social-icons">
+          <a href="#" class="soc-btn">IG</a>
+          <a href="#" class="soc-btn">FB</a>
+          <a href="https://wa.me/91XXXXXXXXXX" class="soc-btn wa">WA</a>
+        </div>
+        <p class="footer-timing">Open: 5:30 AM – 9:30 PM<br>Monday to Saturday</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 KRC Fitness World, Thiruvazhiyode. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-float" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="white" width="28" height="28">
+      <path d="M16 0C7.163 0 0 7.163 0 16c0 2.825.738 5.476 2.031 7.775L0 32l8.418-2.007A15.934 15.934 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.267 13.267 0 01-6.765-1.851l-.485-.289-5.003 1.193 1.224-4.872-.316-.5A13.244 13.244 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.273-9.912c-.397-.199-2.352-1.16-2.717-1.292-.365-.132-.63-.199-.896.199-.266.398-1.029 1.293-1.261 1.558-.232.266-.464.299-.862.1-.397-.2-1.679-.619-3.198-1.973-1.182-1.053-1.98-2.352-2.212-2.75-.232-.397-.025-.612.174-.81.179-.178.398-.464.597-.697.199-.232.265-.398.397-.663.133-.266.066-.498-.033-.697-.1-.199-.896-2.16-1.228-2.957-.323-.776-.65-.671-.896-.683l-.763-.013c-.266 0-.697.1-1.062.498-.365.398-1.394 1.36-1.394 3.317 0 1.957 1.427 3.848 1.626 4.114.2.265 2.808 4.287 6.803 6.014.951.411 1.693.656 2.272.84.954.303 1.823.26 2.51.158.765-.114 2.352-.961 2.684-1.889.332-.928.332-1.724.232-1.889-.099-.166-.365-.265-.763-.464z"/>
+    </svg>
+  </a>
+
+  <script src="js/main.js"></script>
+  <script>
+    function switchTab(tab, btn) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      btn.classList.add('active');
+      // Re-trigger reveal animations
+      document.querySelectorAll('#tab-' + tab + ' .reveal').forEach(el => {
+        el.classList.remove('visible');
+        setTimeout(() => el.classList.add('visible'), 50);
+      });
+    }
+
+    function filterClasses(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.class-card').forEach(card => {
+        if (cat === 'all' || card.dataset.cat === cat) {
+          card.removeAttribute('data-hidden');
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

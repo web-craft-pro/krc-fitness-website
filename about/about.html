@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — KRC Fitness World</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: calc(var(--nav-h) + 5rem) 0 5rem;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(245,197,24,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,197,24,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .page-hero-inner {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .ph-left .section-tag { margin-bottom: 1rem; }
+    .ph-left h1 {
+      font-family: var(--font-head);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+    .ph-left p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 420px;
+    }
+    .ph-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .ph-stat {
+      background: var(--card);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .ph-stat .num {
+      font-family: var(--font-head);
+      font-size: 3rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .ph-stat .lbl {
+      font-family: var(--font-cond);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    /* ── STORY ── */
+    .story-section {
+      padding: 90px 0;
+      background: var(--black);
+    }
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .story-visual {
+      position: relative;
+    }
+    .story-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 3rem 2.5rem;
+      position: relative;
+    }
+    .story-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 60px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+    .story-quote {
+      font-family: var(--font-head);
+      font-size: 3.5rem;
+      color: rgba(245,197,24,0.08);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .story-box p {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.9;
+    }
+    .story-accent {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 120px; height: 120px;
+      border: 2px solid rgba(245,197,24,0.15);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .story-right .section-tag { margin-bottom: 1rem; }
+    .story-right h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+    .story-right p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+    }
+
+    /* ── VALUES ── */
+    .values-section {
+      padding: 90px 0;
+      background: var(--dark);
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 3.5rem;
+    }
+    .value-card {
+      background: var(--card);
+      padding: 2.5rem 2rem;
+      transition: background 0.2s;
+    }
+    .value-card:hover { background: var(--card2); }
+    .value-icon {
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+    }
+    .value-card h3 {
+      font-family: var(--font-cond);
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      margin-bottom: 0.7rem;
+    }
+    .value-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .value-line {
+      width: 28px; height: 2px;
+      background: var(--gold);
+      margin-top: 1.2rem;
+      transition: width 0.3s;
+    }
+    .value-card:hover .value-line { width: 55px; }
+
+    /* ── BRANCHES ── */
+    .branches-section {
+      padding: 90px 0;
+      background: var(--black);
+    }
+    .branches-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    .branch-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.5rem;
+      border-top: 3px solid var(--gold);
+      transition: transform 0.3s;
+    }
+    .branch-card:hover { transform: translateY(-4px); }
+    .branch-num {
+      font-family: var(--font-head);
+      font-size: 3rem;
+      color: rgba(245,197,24,0.15);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .branch-card h3 {
+      font-family: var(--font-cond);
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .branch-info { display: flex; flex-direction: column; gap: 0.7rem; }
+    .bi-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .bi-row .bi-icon { flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
+    .bi-row b { color: var(--text); display: block; margin-bottom: 0.1rem; }
+
+    /* ── CTA ── */
+    .about-cta {
+      padding: 80px 0;
+      background: var(--gold);
+      text-align: center;
+    }
+    .about-cta h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      color: var(--black);
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+    .about-cta p {
+      font-family: var(--font-cond);
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      color: rgba(0,0,0,0.65);
+      margin-bottom: 2rem;
+    }
+    .btn-dark {
+      display: inline-block;
+      background: var(--black);
+      color: var(--gold);
+      font-family: var(--font-cond);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      padding: 0.9rem 2.5rem;
+      border-radius: 6px;
+      transition: background 0.2s;
+      margin: 0 0.5rem;
+    }
+    .btn-dark:hover { background: #1a1a1a; }
+    .btn-dark-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--black);
+      font-family: var(--font-cond);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      padding: 0.9rem 2.5rem;
+      border: 2px solid var(--black);
+      border-radius: 6px;
+      transition: all 0.2s;
+      margin: 0 0.5rem;
+    }
+    .btn-dark-outline:hover { background: var(--black); color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .page-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .ph-left p { max-width: 100%; }
+      .story-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .values-grid { grid-template-columns: 1fr; }
+      .branches-grid { grid-template-columns: 1fr; }
+      .about-cta .btn-dark, .about-cta .btn-dark-outline { display: block; margin: 0.5rem auto; max-width: 240px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" alt="KRC Logo" class="nav-logo-img"/>
+        <div class="nav-logo-text">
+          <span class="logo-krc">KRC</span>
+          <span class="logo-sub">FITNESS WORLD</span>
+        </div>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="classes-trainers.html">Classes & Trainers</a>
+        <a href="membership.html">Membership</a>
+        <a href="index.html#enquiry">Contact</a>
+      </nav>
+      <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-inner">
+      <div class="ph-left reveal">
+        <span class="section-tag">WHO WE ARE</span>
+        <h1>ABOUT <span class="gold">KRC</span></h1>
+        <p>Kerala's premier unisex gym and bodybuilding academy — built on discipline, community, and a relentless pursuit of results.</p>
+      </div>
+      <div class="ph-right reveal" style="--rd:0.15s">
+        <div class="ph-stat"><div class="num">5+</div><div class="lbl">YEARS STRONG</div></div>
+        <div class="ph-stat"><div class="num">500+</div><div class="lbl">MEMBERS</div></div>
+        <div class="ph-stat"><div class="num">10+</div><div class="lbl">TRAINERS</div></div>
+        <div class="ph-stat"><div class="num">2</div><div class="lbl">BRANCHES</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <section class="story-section">
+    <div class="story-grid">
+      <div class="story-visual reveal">
+        <div class="story-box">
+          <div class="story-quote">"</div>
+          <p>KRC Fitness World was founded with one belief — that everyone deserves access to world-class training in a space that respects them. From our first branch in Thiruvazhiyode to our second in Sreekrishnapuram, every machine, every coach, and every programme has been built around that promise.</p>
+        </div>
+        <div class="story-accent"></div>
+      </div>
+      <div class="story-right reveal" style="--rd:0.15s">
+        <span class="section-tag">OUR STORY</span>
+        <h2>BUILT ON <span class="gold">GRIT</span> &amp; COMMUNITY</h2>
+        <p>What started as a single gym with a handful of members has grown into one of Kerala's most trusted fitness destinations. We've trained beginners, competitive bodybuilders, working professionals, and homemakers — each with a unique goal, each treated with equal dedication.</p>
+        <p>Our coaching philosophy is simple: listen first, train smart, and never stop improving. We don't just build bodies — we build confidence, discipline, and habits that last a lifetime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">WHAT DRIVES US</span>
+        <h2 class="section-title">OUR <span class="gold">VALUES</span></h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <div class="value-icon">🎯</div>
+          <h3>RESULTS FIRST</h3>
+          <p>Every programme, every session, every rep is designed around one thing — getting you closer to your goal.</p>
+          <div class="value-line"></div>
+        </div>
+        <div class="value-card reveal" style="--rd:0.1s">
+          <div class="value-icon">🤝</div>
+          <h3>COMMUNITY</h3>
+          <p>We're more than a gym. KRC is a community of people who push each other, celebrate each other, and show up for each other.</p>
+          <div class="value-line"></div>
+        </div>
+        <div class="value-card reveal" style="--rd:0.2s">
+          <div class="value-icon">⚡</div>
+          <h3>EXPERT COACHING</h3>
+          <p>Our certified trainers bring years of real-world experience across bodybuilding, PT, nutrition, and wellness.</p>
+          <div class="value-line"></div>
+        </div>
+        <div class="value-card reveal" style="--rd:0.1s">
+          <div class="value-icon">♀️</div>
+          <h3>INCLUSIVE SPACE</h3>
+          <p>Unisex and welcoming. KRC is a judgment-free zone where everyone — regardless of fitness level — belongs.</p>
+          <div class="value-line"></div>
+        </div>
+        <div class="value-card reveal" style="--rd:0.2s">
+          <div class="value-icon">🏋️</div>
+          <h3>PREMIUM EQUIPMENT</h3>
+          <p>From free weights to machines, cables to cardio — we invest continuously in keeping our facility top-tier.</p>
+          <div class="value-line"></div>
+        </div>
+        <div class="value-card reveal" style="--rd:0.3s">
+          <div class="value-icon">🌱</div>
+          <h3>LONG-TERM GROWTH</h3>
+          <p>Quick fixes aren't our style. We coach for sustainable progress — physically, mentally, and nutritionally.</p>
+          <div class="value-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANCHES -->
+  <section class="branches-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">FIND US</span>
+        <h2 class="section-title">OUR <span class="gold">BRANCHES</span></h2>
+      </div>
+      <div class="branches-grid">
+        <div class="branch-card reveal">
+          <div class="branch-num">01</div>
+          <h3>THIRUVAZHIYODE</h3>
+          <div class="branch-info">
+            <div class="bi-row">
+              <span class="bi-icon">📍</span>
+              <div><b>Address</b>KRC Fitness World, Thiruvazhiyode, Palakkad, Kerala</div>
+            </div>
+            <div class="bi-row">
+              <span class="bi-icon">🕐</span>
+              <div><b>Timings</b>Mon – Sat: 5:30 AM – 9:30 PM</div>
+            </div>
+            <div class="bi-row">
+              <span class="bi-icon">📞</span>
+              <div><b>Phone</b>+91 XXXXX XXXXX</div>
+            </div>
+            <div class="bi-row">
+              <span class="bi-icon">🏷️</span>
+              <div><b>Facilities</b>AC & Non-AC zones, Free weights, Machines, Cardio floor, Locker rooms</div>
+            </div>
+          </div>
+        </div>
+        <div class="branch-card reveal" style="--rd:0.15s">
+          <div class="branch-num">02</div>
+          <h3>SREEKRISHNAPURAM</h3>
+          <div class="branch-info">
+            <div class="bi-row">
+              <span class="bi-icon">📍</span>
+              <div><b>Address</b>KRC Fitness World, Sreekrishnapuram, Palakkad, Kerala</div>
+            </div>
+            <div class="bi-row">
+              <span class="bi-icon">🕐</span>
+              <div><b>Timings</b>Mon – Sat: 5:30 AM – 9:30 PM</div>
+            </div>
+            <div class="bi-row">
+              <span class="bi-icon">📞</span>
+              <div><b>Phone</b>+91 XXXXX XXXXX</div>
+            </div>
+            <div class="bi-row">
+              <span class="bi-icon">🏷️</span>
+              <div><b>Facilities</b>AC & Non-AC zones, Free weights, Machines, Cardio floor, Locker rooms</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="about-cta">
+    <div class="container">
+      <h2>READY TO START?</h2>
+      <p>JOIN HUNDREDS OF MEMBERS ALREADY TRAINING AT KRC</p>
+      <a href="membership.html" class="btn-dark">VIEW PLANS</a>
+      <a href="index.html#enquiry" class="btn-dark-outline">CONTACT US</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner container">
+      <div class="footer-brand">
+        <span class="logo-krc">KRC</span>
+        <span class="logo-sub">FITNESS WORLD</span>
+        <p>Unisex Multi Gym &amp; Bodybuilding Academy</p>
+        <div class="footer-locations">
+          <div>📍 Thiruvazhiyode, Kerala</div>
+          <div>📍 Sreekrishnapuram, Kerala</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>QUICK LINKS</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="classes-trainers.html">Classes & Trainers</a>
+        <a href="membership.html">Membership</a>
+        <a href="index.html#enquiry">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>PROGRAMS</h4>
+        <a href="classes-trainers.html">Personal Training</a>
+        <a href="classes-trainers.html">Group Classes</a>
+        <a href="classes-trainers.html">Bodybuilding</a>
+        <a href="classes-trainers.html">Nutrition</a>
+        <a href="classes-trainers.html">Recovery</a>
+      </div>
+      <div class="footer-social">
+        <h4>FOLLOW US</h4>
+        <div class="social-icons">
+          <a href="#" class="soc-btn">IG</a>
+          <a href="#" class="soc-btn">FB</a>
+          <a href="https://wa.me/91XXXXXXXXXX" class="soc-btn wa">WA</a>
+        </div>
+        <p class="footer-timing">Open: 5:30 AM – 9:30 PM<br>Monday to Saturday</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 KRC Fitness World. All rights reserved.</div>
+  </footer>
+
+  <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-float" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="white" width="28" height="28">
+      <path d="M16 0C7.163 0 0 7.163 0 16c0 2.825.738 5.476 2.031 7.775L0 32l8.418-2.007A15.934 15.934 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.267 13.267 0 01-6.765-1.851l-.485-.289-5.003 1.193 1.224-4.872-.316-.5A13.244 13.244 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.273-9.912c-.397-.199-2.352-1.16-2.717-1.292-.365-.132-.63-.199-.896.199-.266.398-1.029 1.293-1.261 1.558-.232.266-.464.299-.862.1-.397-.2-1.679-.619-3.198-1.973-1.182-1.053-1.98-2.352-2.212-2.75-.232-.397-.025-.612.174-.81.179-.178.398-.464.597-.697.199-.232.265-.398.397-.663.133-.266.066-.498-.033-.697-.1-.199-.896-2.16-1.228-2.957-.323-.776-.65-.671-.896-.683l-.763-.013c-.266 0-.697.1-1.062.498-.365.398-1.394 1.36-1.394 3.317 0 1.957 1.427 3.848 1.626 4.114.2.265 2.808 4.287 6.803 6.014.951.411 1.693.656 2.272.84.954.303 1.823.26 2.51.158.765-.114 2.352-.961 2.684-1.889.332-.928.332-1.724.232-1.889-.099-.166-.365-.265-.763-.464z"/>
+    </svg>
+  </a>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
