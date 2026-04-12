@@ -3,7 +3,7 @@
 ════════════════════════════════════════ */
 
 // ★ Replace with your real WhatsApp number (91 + 10 digits, no spaces)
-const KRC_WA = '91XXXXXXXXXX';
+const KRC_WA = '918590356186';
 
 // Navbar scroll
 const navbar = document.getElementById('navbar');
