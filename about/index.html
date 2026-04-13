@@ -137,13 +137,24 @@
       line-height: 1.9;
     }
     .story-accent {
-      position: absolute;
-      bottom: -20px; right: -20px;
-      width: 120px; height: 120px;
-      border: 2px solid rgba(245,197,24,0.15);
-      border-radius: 50%;
-      pointer-events: none;
-    }
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 0 6px rgba(245, 197, 24, 0.12);
+}
+
+.story-accent img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
     .story-right .section-tag { margin-bottom: 1rem; }
     .story-right h2 {
       font-family: var(--font-head);
@@ -390,23 +401,25 @@
   </div>
 
   <!-- STORY -->
-  <section class="story-section">
-    <div class="story-grid">
-      <div class="story-visual reveal">
-        <div class="story-box">
-          <div class="story-quote">"</div>
-          <p>KRC Fitness World was founded with one belief — that everyone deserves access to world-class training in a space that respects them. From our first branch in Thiruvazhiyode to our second in Sreekrishnapuram, every machine, every coach, and every programme has been built around that promise.</p>
-        </div>
-        <div class="story-accent"></div>
+<section class="story-section">
+  <div class="story-grid">
+    <div class="story-visual reveal">
+      <div class="story-box">
+        <div class="story-quote">"</div>
+        <p>KRC Fitness World was founded with one belief — that everyone deserves access to world-class training in a space that respects them. From our first branch in Thiruvazhiyode to our second in Sreekrishnapuram, every machine, every coach, and every programme has been built around that promise.</p>
       </div>
-      <div class="story-right reveal" style="--rd:0.15s">
-        <span class="section-tag">OUR STORY</span>
-        <h2>BUILT ON <span class="gold">GRIT</span> &amp; COMMUNITY</h2>
-        <p>What started as a single gym with a handful of members has grown into one of Kerala's most trusted fitness destinations. We've trained beginners, competitive bodybuilders, working professionals, and homemakers — each with a unique goal, each treated with equal dedication.</p>
-        <p>Our coaching philosophy is simple: listen first, train smart, and never stop improving. We don't just build bodies — we build confidence, discipline, and habits that last a lifetime.</p>
+      <div class="story-accent">
+        <img src="assets/images/founder.jpg" alt="Founder – KRC Fitness World"/>
       </div>
     </div>
-  </section>
+    <div class="story-right reveal" style="--rd:0.15s">
+      <span class="section-tag">OUR STORY</span>
+      <h2>BUILT ON <span class="gold">GRIT</span> &amp; COMMUNITY</h2>
+      <p>What started as a single gym with a handful of members has grown into one of Kerala's most trusted fitness destinations. We've trained beginners, competitive bodybuilders, working professionals, and homemakers — each with a unique goal, each treated with equal dedication.</p>
+      <p>Our coaching philosophy is simple: listen first, train smart, and never stop improving. We don't just build bodies — we build confidence, discipline, and habits that last a lifetime.</p>
+    </div>
+  </div>
+</section>
 
   <!-- VALUES -->
   <section class="values-section">
