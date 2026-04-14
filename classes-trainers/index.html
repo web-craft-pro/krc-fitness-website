@@ -229,23 +229,33 @@
     }
     .trainer-card:hover { transform: translateY(-6px); border-color: var(--gold); }
     .trainer-avatar {
-      background: linear-gradient(135deg, var(--card2), #1a1600);
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-      border-bottom: 2px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-    .trainer-avatar::before {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--gold);
-    }
+  height: 200px;
+  overflow: hidden;
+  border-bottom: 2px solid var(--border);
+  position: relative;
+}
+
+.trainer-avatar::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold);
+  z-index: 1;
+}
+
+.trainer-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.trainer-card:hover .trainer-avatar img {
+  transform: scale(1.05);
+}
     .trainer-body { padding: 1.8rem 1.5rem; }
     .trainer-body h3 {
       font-family: var(--font-cond);
@@ -594,104 +604,68 @@
     </section>
   </div>
 
-  <!-- ══════ TRAINERS TAB ══════ -->
-  <div id="tab-trainers" class="tab-content">
-    <section class="section" style="background:var(--dark);">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">OUR COACHES</span>
-          <h2 class="section-title">MEET THE <span class="gold">TEAM</span></h2>
-        </div>
-        <div class="trainers-grid">
-
-          <div class="trainer-card reveal">
-            <div class="trainer-avatar">👨‍💼</div>
-            <div class="trainer-body">
-              <h3>Trainer Name</h3>
-              <div class="trainer-role">HEAD COACH · BODYBUILDING</div>
-              <p>Over 8 years of experience in competitive bodybuilding and strength coaching. Certified ISSA trainer.</p>
-              <div class="trainer-skills">
-                <span class="skill-tag">Bodybuilding</span>
-                <span class="skill-tag">Strength</span>
-                <span class="skill-tag">Competition Prep</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="trainer-card reveal" style="--rd:0.1s">
-            <div class="trainer-avatar">👩‍💼</div>
-            <div class="trainer-body">
-              <h3>Trainer Name</h3>
-              <div class="trainer-role">FITNESS COACH · LADIES SECTION</div>
-              <p>Specialises in women's fitness, weight loss and toning with a holistic approach to health and wellbeing.</p>
-              <div class="trainer-skills">
-                <span class="skill-tag">Weight Loss</span>
-                <span class="skill-tag">Toning</span>
-                <span class="skill-tag">Nutrition</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="trainer-card reveal" style="--rd:0.2s">
-            <div class="trainer-avatar">🧑‍💼</div>
-            <div class="trainer-body">
-              <h3>Trainer Name</h3>
-              <div class="trainer-role">PT COACH · HIIT & CARDIO</div>
-              <p>Expert in high-intensity training and functional fitness. Motivates members to push beyond their limits.</p>
-              <div class="trainer-skills">
-                <span class="skill-tag">HIIT</span>
-                <span class="skill-tag">Cardio</span>
-                <span class="skill-tag">Functional</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="trainer-card reveal" style="--rd:0.1s">
-            <div class="trainer-avatar">👨‍🏫</div>
-            <div class="trainer-body">
-              <h3>Trainer Name</h3>
-              <div class="trainer-role">YOGA & WELLNESS COACH</div>
-              <p>Certified yoga instructor with deep expertise in mobility, flexibility, and recovery protocols.</p>
-              <div class="trainer-skills">
-                <span class="skill-tag">Yoga</span>
-                <span class="skill-tag">Mobility</span>
-                <span class="skill-tag">Recovery</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="trainer-card reveal" style="--rd:0.2s">
-            <div class="trainer-avatar">👩‍🏫</div>
-            <div class="trainer-body">
-              <h3>Trainer Name</h3>
-              <div class="trainer-role">ZUMBA INSTRUCTOR</div>
-              <p>High-energy Zumba and dance fitness instructor. Makes every session fun, effective and unforgettable.</p>
-              <div class="trainer-skills">
-                <span class="skill-tag">Zumba</span>
-                <span class="skill-tag">Dance Fitness</span>
-                <span class="skill-tag">Cardio</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="trainer-card reveal" style="--rd:0.3s">
-            <div class="trainer-avatar">🧑‍🔬</div>
-            <div class="trainer-body">
-              <h3>Trainer Name</h3>
-              <div class="trainer-role">NUTRITION SPECIALIST</div>
-              <p>Diet planning, supplement guidance and body composition analysis to maximise your training results.</p>
-              <div class="trainer-skills">
-                <span class="skill-tag">Diet Planning</span>
-                <span class="skill-tag">Supplements</span>
-                <span class="skill-tag">Body Composition</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
+ <!-- ══════ TRAINERS TAB ══════ -->
+<div id="tab-trainers" class="tab-content">
+  <section class="section" style="background:var(--dark);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">OUR COACHES</span>
+        <h2 class="section-title">MEET THE <span class="gold">TEAM</span></h2>
       </div>
-    </section>
-  </div>
+      <div class="trainers-grid">
+
+        <div class="trainer-card reveal">
+          <div class="trainer-avatar">
+            <img src="../images/trainer1.jpg" alt="Head Coach – KRC Fitness World"/>
+          </div>
+          <div class="trainer-body">
+            <h3>Trainer Name</h3>
+            <div class="trainer-role">HEAD COACH · BODYBUILDING</div>
+            <p>Over 8 years of experience in competitive bodybuilding and strength coaching. Certified ISSA trainer.</p>
+            <div class="trainer-skills">
+              <span class="skill-tag">Bodybuilding</span>
+              <span class="skill-tag">Strength</span>
+              <span class="skill-tag">Competition Prep</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="trainer-card reveal" style="--rd:0.1s">
+          <div class="trainer-avatar">
+            <img src="../images/trainer1.jpg" alt="Fitness Coach – KRC Fitness World"/>
+          </div>
+          <div class="trainer-body">
+            <h3>Trainer Name</h3>
+            <div class="trainer-role">FITNESS COACH · LADIES SECTION</div>
+            <p>Specialises in women's fitness, weight loss and toning with a holistic approach to health and wellbeing.</p>
+            <div class="trainer-skills">
+              <span class="skill-tag">Weight Loss</span>
+              <span class="skill-tag">Toning</span>
+              <span class="skill-tag">Nutrition</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="trainer-card reveal" style="--rd:0.2s">
+          <div class="trainer-avatar">
+            <img src="../images/trainer3.jpg" alt="PT Coach – KRC Fitness World"/>
+          </div>
+          <div class="trainer-body">
+            <h3>Trainer Name</h3>
+            <div class="trainer-role">PT COACH · HIIT &amp; CARDIO</div>
+            <p>Expert in high-intensity training and functional fitness. Motivates members to push beyond their limits.</p>
+            <div class="trainer-skills">
+              <span class="skill-tag">HIIT</span>
+              <span class="skill-tag">Cardio</span>
+              <span class="skill-tag">Functional</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
 
   <!-- FOOTER -->
   <footer class="footer">
